@@ -69,4 +69,4 @@ oe_test_performance_monitor_pcp
 ## 课程工作
 
 - [openEuler RISC-V 应用编程技术 Chapter2 Lab1](https://github.com/KiritakeKumi/OpenEuler-Application-For-RISC-V-Programming/blob/main/Files/Chapter2/Lab1/Lab1.md)
-- [openEuler RISC-V 应用编程技术 Chapter1 Lab2](https://github.com/KiritakeKumi/OpenEuler-Application-For-RISC-V-Programming/blob/main/Files/Chapter2/Lab2/Lab2.md)
+- [openEuler RISC-V 应用编程技术 Chapter2 Lab2](https://github.com/KiritakeKumi/OpenEuler-Application-For-RISC-V-Programming/blob/main/Files/Chapter2/Lab2/Lab2.md)
