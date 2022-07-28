@@ -28,11 +28,11 @@
 3. 检查是否正常显示软件列表
 
 
-## Python
+## Python/pip
 
 1. 启动Python 并确认版本号
 
 2. 执行命令 print("hello world")
 
-
+3. 安装pip（apt/get-pip.py 二选一）
 
