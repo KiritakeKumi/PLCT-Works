@@ -1,4 +1,4 @@
-# openKylin-RISC-V 基础验证流程
+# openKylin-RISC-V 0.8 基础验证流程
 
 ## Firefox
 
@@ -25,7 +25,7 @@
 
 2. 锁定屏幕重新登录
 
-3. 检查是否正常显示软件列表
+3. 检查是否正常显示菜单软件列表
 
 
 ## Python/pip
