@@ -31,9 +31,7 @@
 ## Python/pip
 
 1. 启动Python 并确认版本号
-
 2. 执行命令 print("hello world")
-
 3. 安装pip（apt/get-pip.py 二选一）
-ps：ok0.7目前由于缺少py3-wheel导致无法安装（官方打包原因）
+4. 确认pip是否可用
 
