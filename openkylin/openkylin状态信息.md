@@ -6,7 +6,7 @@
 
 ## 版本列表
 
-|                         版本                         | 开发代号 |  发布日期  | 结束支持时间 | 内核版本 |                 支持的RISC-V硬件平台                 |
+|                         版本                         | 开发代号 |  发布日期  | 结束支持时间 | 内核版本 |                 支持的RISC-V平台                 |
 | :--------------------------------------------------: | :------: | :--------: | :----------: | :------: | :--------------------------------------------------: |
 |  <table><tr><td bgcolor=green>0.7</td></tr></table>  |    -     | 2022.06.24 |      -       |   5.11   | HiFive Unmatched <br />StarFive VisionFive<br />QEMU |
 | <table><tr><td bgcolor=green>0.7.5</td></tr></table> |    -     | 2022.08.25 |      -       |   5.11   | HiFive Unmatched <br />StarFive VisionFive<br />QEMU |
