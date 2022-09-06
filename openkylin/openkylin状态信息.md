@@ -8,8 +8,8 @@
 
 |                         版本                         | 开发代号 |  发布日期  | 结束支持时间 | 内核版本 |                 支持的RISC-V平台                 |
 | :--------------------------------------------------: | :------: | :--------: | :----------: | :------: | :--------------------------------------------------: |
-|  <table><tr><td bgcolor=green>0.7</td></tr></table>  |    -     | 2022.06.24 |      -       |   5.11   | HiFive Unmatched <br />StarFive VisionFive<br />QEMU |
-| <table><tr><td bgcolor=green>0.7.5</td></tr></table> |    -     | 2022.08.25 |      -       |   5.11   | HiFive Unmatched <br />StarFive VisionFive<br />QEMU |
+|  <table><tr><td bgcolor=green>0.7</td></tr></table>  |    -     | 2022.06.24 |      -       |   5.11   | HiFive Unmatched <br />StarFive VisionFive<br />QEMU* |
+| <table><tr><td bgcolor=green>0.7.5</td></tr></table> |    -     | 2022.08.25 |      -       |   5.11   | HiFive Unmatched <br />StarFive VisionFive<br />QEMU* |
 | <table><tr><td bgcolor=orange>0.8</td></tr></table>  |    -     |  2022.08   |      -       |          |                                                      |
 | <table><tr><td bgcolor=orange>0.9</td></tr></table>  |    -     |  2022.10   |      -       |          |                                                      |
 | <table><tr><td bgcolor=orange>1.0</td></tr></table>  |    -     |  2022.12   |      -       |          |                                                      |
@@ -25,6 +25,7 @@ Ps：绿色背景代表该版本已发布，且处于生命周期内。红色代
 
 Pss:本处发布时间按照ok公众号的发布时间做统计
 
+Psss:QEMU*:官方并未提供QEMU包 通过其他渠道运行成功
 
 ## 软件可用性
 
