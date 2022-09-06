@@ -6,9 +6,9 @@
 
 2. 启动 并通过GUI界面确定 Firefox 版本号
 
-3. 访问 www.baidu.com 验证其是否可以正常渲染
+3. 访问 https://www.bilibili.com/video/BV1Q5411w7z5 是否正常播放
 
-4. 访问 HTML5 Test （https://html5test.com）初步验证相关功能是否可用
+4. 访问 HTML5 Test （https://html5test.com）验证h6相关功能是否可用
 
 5. 针对阅读模式，无痕模式分别进行验证。
 
@@ -31,7 +31,10 @@
 ## Python/pip
 
 1. 启动Python 并确认版本号
+
 2. 执行命令 print("hello world")
+
 3. 安装pip（apt/get-pip.py 二选一）
-4. 确认pip是否可用
+
+4. 确认pip是否可用 随意安装程序确认
 
