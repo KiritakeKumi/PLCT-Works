@@ -1,0 +1,507 @@
+openEuler 22.03 LTS
+Kernel 5.10.0 on an riscv64
+
+openEuler-riscv64 login:
+openEuler 22.03 LTS
+Kernel 5.10.0 on an riscv64
+
+openEuler-riscv64 login: root
+Password:
+Last login: Thu Mar 31 08:14:57 on ttyS0
+
+
+Welcome to 5.10.0
+
+System information as of time:  Fri Jul  1 02:12:46 UTC 2022
+
+System load:    0.30
+Processes:      82
+Memory used:    2.0%
+Swap used:      0.0%
+Usage On:       12%
+IP address:     10.0.2.15
+Users online:   1
+
+
+
+[root@openEuler-riscv64 ~]# dnf config-manager --add-repo http://119.3.219.20:82/openEuler:/Mainline:/RISC-V/standard_riscv64/
+Adding repo from: http://119.3.219.20:82/openEuler:/Mainline:/RISC-V/standard_riscv64/
+[root@openEuler-riscv64 ~]# timedatectl set-timezone Asia/Shanghai
+[root@openEuler-riscv64 ~]# timedatectl set-ntp yes
+[  333.239905] systemd-rc-local-generator[280]: /etc/rc.d/rc.local is not marked executable, skipping.
+[root@openEuler-riscv64 ~]# date --set 2022-03-22
+Tue Mar 22 00:00:00 CST 2022
+[root@openEuler-riscv64 ~]# date --set 21:19:20
+Tue Mar 22 21:19:20 CST 2022
+[root@openEuler-riscv64 ~]# dnf install osc
+
+You have enabled checking of packages via GPG keys. This is a good thing.
+However, you do not have any GPG public keys installed. You need to download
+the keys for packages you wish to install and install them.
+You can do that by running the command:
+    rpm --import public.gpg.key
+
+
+Alternatively you can specify the url to the key you would like to use
+for a repository in the 'gpgkey' option in a repository section and DNF
+will install it for you.
+
+For more information contact your distribution or package provider.
+
+Problem repository: [119.3.219.20_82_openEuler_Mainline_RISC-V_standard_riscv64_]
+bandwidth: 0
+baseurl: http://119.3.219.20:82/openEuler:/Mainline:/RISC-V/standard_riscv64/
+cachedir: /var/cache/dnf
+cost: 1000
+countme: 0
+deltarpm: 1
+deltarpm_percentage: 75
+enabled: 1
+enabled_metadata:
+enablegroups: 1
+exclude:
+excludepkgs:
+fastestmirror: 0
+gpgcheck: 1
+gpgkey:
+includepkgs:
+ip_resolve: whatever
+max_parallel_downloads: 3
+mediaid:
+metadata_expire: 172800
+metalink:
+minrate: 1000
+mirrorlist:
+module_hotfixes: 0
+name: created by dnf config-manager from http://119.3.219.20:82/openEuler:/Mainline:/RISC-V/standard_riscv64/
+password:
+priority: 99
+protected_packages: dnf, systemd, systemd-udev, dnf, yum, sudo, systemd, systemd-udev, dnf, yum, sudo
+proxy:
+proxy_auth_method: any
+proxy_password:
+proxy_sslcacert:
+#[base]
+#name=base
+#baseurl=https://mirror.iscas.ac.cn/openeuler-sig-riscv/epol/
+#enabled=1
+#gpgcheck=0
+~
+~
+~
+~
+"/etc/yum.repos.d/openEuler.repo" 5L, 104C written
+[root@openEuler-riscv64 ~]# dnf install osc
+created by dnf config-manager from http://119.3  15 kB/s | 1.7 kB     00:00
+Last metadata expiration check: 0:00:01 ago on Tue Mar 22 21:23:22 2022.
+Package osc-0.169.1-3.oe1.noarch is already installed.
+Dependencies resolved.
+Nothing to do.
+Complete!
+[root@openEuler-riscv64 ~]# dnf install build
+created by dnf config-manager from http://119.3  10 kB/s | 1.7 kB     00:00
+Last metadata expiration check: 0:00:01 ago on Tue Mar 22 21:25:16 2022.
+Package build-20211125-1.oe1.noarch is already installed.
+Dependencies resolved.
+Nothing to do.
+Complete!
+[root@openEuler-riscv64 ~]# dnf install sudo
+created by dnf config-manager from http://119.3  15 kB/s | 1.7 kB     00:00
+Last metadata expiration check: 0:00:01 ago on Tue Mar 22 21:25:46 2022.
+Package sudo-1.9.5p2-3.oe1.riscv64 is already installed.
+Dependencies resolved.
+Nothing to do.
+Complete!
+[root@openEuler-riscv64 ~]# osc co openEuler:Mainline:RISC-V/aalib
+
+Your user account / password are not configured yet.
+You will be asked for them below, and they will be stored in
+/root/.config/osc/oscrc for future use.
+
+Creating osc configuration file /root/.config/osc/oscrc ...
+Username: kiritakekumi
+Password:
+To use keyrings please install python3-keyring.
+1) Config file credentials manager (Store the credentials in the config file (plain text))
+2) Obfuscated Config file credentials manager (Store the credentials in the config file (obfuscated))
+[general]
+# URL to access API server, e.g. https://api.opensuse.org
+# you also need a section [https://api.opensuse.org] with the credentials
+apiurl = https://build.openeuler.org/
+# Downloaded packages are cached here. Must be writable by you.
+#packagecachedir = /var/tmp/osbuild-packagecache
+# Wrapper to call build as root (sudo, su -, ...)
+#su-wrapper = sudo
+# rootdir to setup the chroot environment
+# extracted from currently used apiurl) for replacement, e.g.
+# /srv/oscbuild/%(repo)s-%(arch)s or
+# /srv/oscbuild/%(repo)s-%(arch)s-%(project)s-%(package)s
+#build-root = /var/tmp/build-root/%(repo)s-%(arch)s
+# compile with N jobs (default: "getconf _NPROCESSORS_ONLN")
+#build-jobs = N
+# empty    -  chroot build
+# kvm      -  kvm VM build  (needs build-device, build-swap, build-memory)
+# xen      -  xen VM build  (needs build-device, build-swap, build-memory)
+#     lxc  -  lxc build
+#build-type =
+# build-device is the disk-image file to use as root for VM builds
+# build-swap is the disk-image to use as swap for VM builds
+# e.g. /var/tmp/FILE.swap
+#build-swap = /var/tmp/FILE.swap
+# build-kernel is the boot kernel used for VM builds
+#build-kernel = /boot/vmlinuz
+# build-initrd is the boot initrd used for VM builds
+#build-initrd = /boot/initrd
+# build-memory is the amount of memory used in the VM
+# value in MB - e.g. 512
+#build-memory = 512
+# build-vmdisk-rootsize is the size of the disk-image used as root in a VM build
+# values in MB - e.g. 4096
+#build-vmdisk-rootsize = 4096
+# build-vmdisk-swapsize is the size of the disk-image used as swap in a VM build
+# values in MB - e.g. 1024
+#build-vmdisk-swapsize = 1024
+# values are ext3(default) ext4 xfs reiserfs btrfs
+#build-vmdisk-filesystem = ext4
+# Numeric uid:gid to assign to the "abuild" user in the build-root
+# or "caller" to use the current users uid:gid
+# This is convenient when sharing the buildroot with ordinary userids
+# on the host.
+# strip leading build time information from the build log
+# buildlog_strip_time = 1
+# Enable ccache in build roots.
+# this corresponds to osc build's -x option and can be overridden with that
+# -x '' can also be given on the command line to override this setting, or
+# you can have an empty setting here. This global setting may leads to
+# dependency problems when the base distro is not providing the package.
+# => using server side definition via cli_debug_packages substitute rule is
+#    recommended therefore.
+#extra-pkgs =
+# build platform is used if the platform argument is omitted to osc build
+#build_repository = openSUSE_Factory
+# default project for getpac or bco
+#getpac_default_project = openSUSE:Factory
+[general]
+# URL to access API server, e.g. https://api.opensuse.org
+# you also need a section [https://api.opensuse.org] with the credentials
+apiurl = https://build.openeuler.org/
+# Downloaded packages are cached here. Must be writable by you.
+#packagecachedir = /var/tmp/osbuild-packagecache
+# Wrapper to call build as root (sudo, su -, ...)
+#su-wrapper = sudo
+# rootdir to setup the chroot environment
+# extracted from currently used apiurl) for replacement, e.g.
+# /srv/oscbuild/%(repo)s-%(arch)s or
+# /srv/oscbuild/%(repo)s-%(arch)s-%(project)s-%(package)s
+#build-root = /var/tmp/build-root/%(repo)s-%(arch)s
+# compile with N jobs (default: "getconf _NPROCESSORS_ONLN")
+#build-jobs = N
+# empty    -  chroot build
+# kvm      -  kvm VM build  (needs build-device, build-swap, build-memory)
+# xen      -  xen VM build  (needs build-device, build-swap, build-memory)
+#     lxc  -  lxc build
+#build-type =
+# build-device is the disk-image file to use as root for VM builds
+# build-swap is the disk-image to use as swap for VM builds
+# e.g. /var/tmp/FILE.swap
+#build-swap = /var/tmp/FILE.swap
+# build-kernel is the boot kernel used for VM builds
+#build-kernel = /boot/vmlinuz
+# build-initrd is the boot initrd used for VM builds
+#build-initrd = /boot/initrd
+# build-memory is the amount of memory used in the VM
+# value in MB - e.g. 512
+#build-memory = 512
+# build-vmdisk-rootsize is the size of the disk-image used as root in a VM build
+# values in MB - e.g. 4096
+#build-vmdisk-rootsize = 4096
+# build-vmdisk-swapsize is the size of the disk-image used as swap in a VM build
+# values in MB - e.g. 1024
+#build-vmdisk-swapsize = 1024
+# values are ext3(default) ext4 xfs reiserfs btrfs
+#build-vmdisk-filesystem = ext4
+# Numeric uid:gid to assign to the "abuild" user in the build-root
+# or "caller" to use the current users uid:gid
+# This is convenient when sharing the buildroot with ordinary userids
+# on the host.
+# strip leading build time information from the build log
+# buildlog_strip_time = 1
+# Enable ccache in build roots.
+# this corresponds to osc build's -x option and can be overridden with that
+# -x '' can also be given on the command line to override this setting, or
+# you can have an empty setting here. This global setting may leads to
+# dependency problems when the base distro is not providing the package.
+# => using server side definition via cli_debug_packages substitute rule is
+#    recommended therefore.
+#extra-pkgs =
+# build platform is used if the platform argument is omitted to osc build
+#build_repository = openSUSE_Factory
+# default project for getpac or bco
+#getpac_default_project = openSUSE:Factory
+# alternate filesystem layout: have multiple subdirs, where colons were.
+#checkout_no_colon = 0
+# local files to ignore with status, addremove, ....
+# Use 0 for unlimted.
+#request_list_days = 0
+# show info useful for debugging
+#debug = 1
+# show HTTP traffic useful for debugging
+#http_debug = 1
+# number of retries on HTTP transfer
+#http_retries = 3
+# Skip signature verification of packages used for build.
+#no_verify = 1
+# jump into the debugger in case of errors
+#post_mortem = 1
+# print call traces in case of errors
+#traceback = 1
+# check for unversioned/removed files before commit
+#check_filelist = 1
+#check_for_request_on_action = 1
+# what to do with the source package if the submitrequest has been accepted. If
+# nothing is specified the API default is used
+#submitrequest_accepted_template = Hi %(who)s,\n
+# thanks for working on:\t%(tgt_project)s/%(tgt_package)s.
+# SR %(reqid)s has been accepted.\n\nYour maintainers
+# template for a declined submitrequest
+#submitrequest_declined_template = Hi %(who)s,\n
+# sorry your SR %(reqid)s (request type: %(type)s) for
+# jump into the debugger in case of errors
+#post_mortem = 1
+# print call traces in case of errors
+#traceback = 1
+# check for unversioned/removed files before commit
+#check_filelist = 1
+#check_for_request_on_action = 1
+# what to do with the source package if the submitrequest has been accepted. If
+# nothing is specified the API default is used
+#submitrequest_accepted_template = Hi %(who)s,\n
+# thanks for working on:\t%(tgt_project)s/%(tgt_package)s.
+# SR %(reqid)s has been accepted.\n\nYour maintainers
+# template for a declined submitrequest
+#submitrequest_declined_template = Hi %(who)s,\n
+# sorry your SR %(reqid)s (request type: %(type)s) for
+# show HTTP traffic useful for debugging
+#http_debug = 1
+# number of retries on HTTP transfer
+#http_retries = 3
+# Skip signature verification of packages used for build.
+no_verify = 1
+# jump into the debugger in case of errors
+#post_mortem = 1
+# print call traces in case of errors
+#traceback = 1
+# check for unversioned/removed files before commit
+#check_filelist = 1
+#check_for_request_on_action = 1
+# what to do with the source package if the submitrequest has been accepted. If
+# nothing is specified the API default is used
+#submitrequest_accepted_template = Hi %(who)s,\n
+# thanks for working on:\t%(tgt_project)s/%(tgt_package)s.
+# SR %(reqid)s has been accepted.\n\nYour maintainers
+# template for a declined submitrequest
+#submitrequest_declined_template = Hi %(who)s,\n
+# sorry your SR %(reqid)s (request type: %(type)s) for
+# %(tgt_project)s/%(tgt_package)s has been declined because...
+#review requests interactively (default: off)
+#request_show_review = 1
+# if a review is accepted in interactive mode and a group
+# was specified the review will be accepted for this group (default: off)
+#review_inherit_group = 1
+
+[https://build.openeuler.org]
+# set aliases for this apiurl
+# aliases = foo, bar
+# real name used in .changes, unless the one from osc meta prj <user> will be uss
+ed
+# realname =
+# email used in .changes, unless the one from osc meta prj <user> will be used
+# email =
+# additional headers to pass to a request, e.g. for special authentication
+#http_headers = Host: foofoobar,
+#       User: mumblegack
+# Plain text password
+#pass =
+user=kiritakekumi
+pass=QlpoOTFBWSZTWQxRMdIAAAANACYAQAAgACAAIYNBmgJosji7kinChIBiiY6Q
+credentials_mgr_class=osc.credentials.ObfuscatedConfigFileCredentialsManager
+".config/osc/oscrc" 126L, 5584C written
+[root@openEuler-riscv64 ~]# osc co openEuler:Mainline:RISC-V/aalib
+*** certificate verify failed at depth 0
+Subject:  /CN=build.openeuler.org
+Issuer:   /C=US/O=Let's Encrypt/CN=R3
+Valid:  Jun 25 00:42:22 2022 GMT - Sep 23 00:42:21 2022 GMT
+Fingerprint(MD5):   B6EA20E4CB58A6C586648D255D5473C8
+Fingerprint(SHA1):  A0B5D29D4B0A7CDE38FCDFE166DFF4BC79C7F47B
+Reason: certificate is not yet valid
+
+The server certificate failed verification
+
+Would you like to
+0 - quit (default)
+1 - continue anyways
+2 - trust the server certificate permanently
+9 - review the server certificate
+
+Enter choice [0129]: 1
+A    openEuler:Mainline:RISC-V
+IncompleteRead(702 bytes read)
+[root@openEuler-riscv64 ~]# osc co openEuler:Mainline:RISC-V/aalib
+*** certificate verify failed at depth 0
+Subject:  /CN=build.openeuler.org
+Issuer:   /C=US/O=Let's Encrypt/CN=R3
+Valid:  Jun 25 00:42:22 2022 GMT - Sep 23 00:42:21 2022 GMT
+Fingerprint(MD5):   B6EA20E4CB58A6C586648D255D5473C8
+Fingerprint(SHA1):  A0B5D29D4B0A7CDE38FCDFE166DFF4BC79C7F47B
+Reason: certificate is not yet valid
+
+The server certificate failed verification
+
+Would you like to
+0 - quit (default)
+1 - continue anyways
+2 - trust the server certificate permanently
+9 - review the server certificate
+
+Enter choice [0129]: 2
+A    openEuler:Mainline:RISC-V/aalib
+IncompleteRead(0 bytes read)
+[root@openEuler-riscv64 ~]# ls
+openEuler:Mainline:RISC-V
+[root@openEuler-riscv64 ~]# cd openEuler\:Mainline\:RISC-V/aalib/
+[root@openEuler-riscv64 aalib]# ls
+[root@openEuler-riscv64 aalib]# osc up -S
+A    _service
+A    _service:extract_file:README.en.md
+A    _service:extract_file:README.md
+A    _service:extract_file:aalib-1.4rc5-bug149361.patch
+IncompleteRead(0 bytes read)
+[root@openEuler-riscv64 aalib]# ls
+_service
+_service:extract_file:README.en.md
+_service:extract_file:README.md
+_service:extract_file:aalib-1.4rc5-bug149361.patch
+[root@openEuler-riscv64 aalib]# osc status .
+?    _service
+?    _service:extract_file:README.en.md
+?    _service:extract_file:README.md
+?    _service:extract_file:aalib-1.4rc5-bug149361.patch
+[root@openEuler-riscv64 aalib]# rm -f _service;for file in `ls | grep -v .osc`;do new_file=${file##*:};mv $file $new_file;done
+[root@openEuler-riscv64 aalib]# osc help
+Usage: osc [GLOBALOPTS] SUBCOMMAND [OPTS] [ARGS...]
+or: osc help SUBCOMMAND
+
+openSUSE build service command-line tool.
+Type 'osc help <subcommand>' for help on a specific subcommand.
+
+commands:
+    add               Mark files to be added upon the next commit
+    addchannels       Add channels to project.
+    addcontainers     Add maintained containers for a give package
+    addremove (ar)    Adds new files, removes disappeared files
+    aggregatepac      "Aggregate" a package to another package
+    api               Issue an arbitrary request to the API
+    branch (bco, branchco, getpac)
+                      Branch a package
+    browse            opens browser
+    build (chroot, shell, wipe)
+                      Build a package on your local machine
+    buildconfig       Shows the build config
+    buildhistory (buildhist)
+                      Shows the build history of a package
+    buildinfo         Shows the build info
+    buildlog (bl, blt, buildlogtail)
+                      Shows the build log of a package
+    cat (blame, less)
+                      Output the content of a file to standard output
+    changedevelrequest (changedevelreq, cr)
+                      Create request to change the devel package definition.
+    checkconstraints
+                      check the constraints and view compliant workers
+    checkout (co)     Check out content from the repository
+    clean             removes all untracked files from the package working ...
+    comment           List / create / delete comments
+    commit (checkin, ci)
+                      Upload content to the repository server
+    config            get/set a config option
+    copypac           Copy a package
+    createincident    Create a maintenance incident
+    createrequest (creq)
+                      create multiple requests with a single command
+    delete (del, remove, rm)
+                      Mark files or package directories to be deleted upon ...
+    deleterequest (deletereq, dr, dropreq, droprequest)
+                      Request to delete (or 'drop') a package or project
+    dependson         dependson shows the build dependencies inside of a pr...
+    detachbranch      replace a link with its expanded sources
+    develproject (bsdevelproject, dp)
+                      print the devel project / package of a package
+    diff (di, ldiff, linkdiff)
+                      Generates a diff
+    distributions (dists)
+                      Shows all available distributions
+    enablechannels (enablechannel)
+                      Enables channels
+    getbinaries       Download binaries to a local directory
+    help (?, h)       give detailed help on a specific sub-command
+    importsrcpkg      Import a new package from a src.rpm
+    info              Print information about a working copy
+    init              Initialize a directory as working copy
+    jobhistory (jobhist)
+                      Shows the job history of a project
+    linkpac           "Link" a package to another package
+    linktobranch      Convert a package containing a classic link with patc...
+    list (LL, lL, ll, ls)
+                      List sources or binaries on the server
+    localbuildlog (lbl)
+                      Shows the build log of a local buildchroot
+    lock              Locks a project or package.
+    log               Shows the commit log of a package
+    maintainer (bugowner)
+                      Show maintainers according to server side configuration
+    maintenancerequest (mr)
+                      Create a request for starting a maintenance incident.
+    man               generates a man page
+    mbranch (maintained, sm)
+                      Search or branch multiple instances of a package
+    meta              Show meta information, or edit it
+    mkpac             Create a new package under version control
+    mv                Move SOURCE file to DEST and keep it under version co...
+    my                show waiting work, packages, projects or requests inv...
+    patchinfo         Generate and edit a patchinfo file.
+    pdiff             Quick alias to diff the content of a package with its...
+    prdiff (projdiff, projectdiff)
+                      Server-side diff of two projects
+    prjresults (pr)   Shows project-wide build results
+    pull              merge the changes of the link target into your workin...
+    rdelete           Delete a project or packages on the server.
+    rdiff             Server-side "pretty" diff of two packages
+    rebuild (rebuildpac)
+                      Trigger package rebuilds
+    release           Release sources and binaries
+    releaserequest    Create a request for releasing a maintenance update.
+    remotebuildlog (rbl, rblt, rbuildlog, rbuildlogtail, remotebuildlogtail)
+                      Shows the build log of a package
+    repairlink        Repair a broken source link
+    repairwc          try to repair an inconsistent working copy
+    repositories (platforms, repos)
+                      shows repositories configured for a project. It skips...
+    repourls          Shows URLs of .repo files
+    request (review, rq)
+                      Show or modify requests and reviews
+    requestmaintainership (reqbs, reqbugownership, reqmaintainership, reqms, requestbugownership)
+                      requests to add user as maintainer or bugowner
+    resolved          Remove 'conflicted' state on working copy files
+    restartbuild (abortbuild)
+                      Restart the build of a certain project or package
+    results (r)       Shows the build results of a package or project
+    revert            Restore changed files or the entire working copy.
+    rpmlintlog (lint, rpmlint)
+                      Shows the rpmlint logfile
+    rremove           Remove source files from selected package
+    search (bse, se)
+                      Search for a project and/or package.
+    sendsysrq         trigger a sysrq in a running build
+    service           Handle source services
+    setdevelproject (sdp)
+                      Set the devel project / package of a package

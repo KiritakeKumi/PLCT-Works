@@ -38,3 +38,6 @@
 
 4. 确认pip是否可用 随意安装程序确认
 
+## apt包管理器
+
+1. 执行apt update / apt upgrade

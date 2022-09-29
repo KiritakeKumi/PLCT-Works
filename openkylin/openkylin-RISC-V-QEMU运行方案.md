@@ -1,16 +1,26 @@
 
 
 
-# openkylin-RISC-V-QEMU运行方案
+# 创建适用于 OpenKylin RISC-V 的 QEMU 虚拟机
 
 ## 前言 
 
 本文档记录的是使用visionfive包在QEMU上运行。
 
+#### 基础系统以及镜像环境
+
+Ubuntu 20.04 LTS
+
+QEMU 7.0 (qemu-system-riscv64)
+
+Openkylin 0.7.5 for RISC-V 
+
+https://mirror.lzu.edu.cn/openkylin-cdimage/0.7/openkylin-0.7.5-visionfive-riscv64.img.xz
+
 
 ## 开始动手
 
-由于visionfive包本身就使用的u-boot方式启动 所以此处就将计就计
+由于visionfive包本身使用的u-boot方式启动 所以此处就将计就计
 
 
 1. 到https://toolchains.bootlin.com/ 下载riscv64工具链，将bin目录添加到PATH
