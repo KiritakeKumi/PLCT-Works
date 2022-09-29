@@ -88,3 +88,21 @@ qemu-system-riscv64 \
   -bios none
 
   ```
+
+
+[可选] 启动参数调整
+
+vcpu 为 qemu 运行线程数，与 CPU 核数没有严格对应，建议维持为 8 不变
+
+memory 为虚拟机内存数目，可随需要调整
+
+drive 为虚拟磁盘路径，可随需要调整
+
+
+
+6. 登录虚拟机
+
+
+用户名: openkylin
+
+默认密码: openkylin
