@@ -67,7 +67,9 @@ zypper ar https://repos.tarsier-infra.com/eulaceura/repos/Eulaceura.repo
 
 ![image-20221021114132800](image-20221021114132800.png)
 
-本来是想看看汪老师的课程 不过Firefox貌似对于多媒体内容较多的暂时存在一点问题 
+
+
+本来是想看看汪老师的课程 不过发现未知原因打不开b站 只好作罢 
 
 
 
@@ -85,15 +87,45 @@ zypper ar https://repos.tarsier-infra.com/eulaceura/repos/Eulaceura.repo
 
 
 
-在预装的软件中还有Qt4 mpv atril docker等工具  有着很强的生产力
+系统的桌面采用的是Kiran
+
+
+
+![image-20221021212621933](image-20221021212621933.png)
+
+
+
+kiran桌面是湖南麒麟信安团队以用户和市场需求为导向，研发的一个安全、稳定、高效、易用的桌面环境。
+
+这个我们在老朋友openEuler上也是有的
+
+
+
+
+
+
+
+在预装的软件中还有Qt4 mpv  atril docker等工具  有着很强的生产力
+
+其中除了mpv直接打不开之外（跑  其他均可正常运行
+
+
+
+![image-20221021225342887](image-20221021225342887.png)
+
+*Atril* 正常工作
+
+
+
+
+
+
 
 
 
 另外Eulaceura采用了ZYpp作为包管理工具
 
+ZYpp包管理工具是一个一般用在openSUSE上的工具，出现在这里还是很意外的，目前oerv主要使用的是openeuler其使用的是yum管理工具
 
-
-
-
-
+但是均是基于RPM 包管理的 所以相对来说还是比较方便同学们学习使用的
 
