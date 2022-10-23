@@ -1,11 +1,12 @@
 ## Eulaceura 
 
 
+### 前言
 
 Eulaceura旨在为oerv提供一个较为稳定的发行版 今天就让我们一起来看看吧（跑
 
 
-
+### 启动 Eulaceura 
 默认所提供的启动脚本是无法启动GUI的 但是可以直接拿oe的启动脚本改 下面是个抄作业的环节（
 
 ```
@@ -45,6 +46,11 @@ root / Eulaceura12#$
 
 
 
+### 系统环境及软件
+
+
+#### 内核
+
 ![image-20221021103200311](image-20221021103200311.png)
 
 进入系统后我们可以看到采用了5.10的内核
@@ -59,7 +65,7 @@ root / Eulaceura12#$
 zypper ar https://repos.tarsier-infra.com/eulaceura/repos/Eulaceura.repo
 ```
 
-
+#### Firefox
 
 预装的软件方面可以看到主要有Firefox 可以满足基本的工作
 
@@ -82,6 +88,8 @@ zypper ar https://repos.tarsier-infra.com/eulaceura/repos/Eulaceura.repo
 
 
 
+#### Kiran
+
 
 ![image-20221021114617933](image-20221021114617933.png)
 
@@ -102,7 +110,7 @@ kiran桌面是湖南麒麟信安团队以用户和市场需求为导向，研发
 
 
 
-
+#### 其他软件
 
 
 在预装的软件中还有Qt4 mpv  atril docker等工具  有着很强的生产力
@@ -120,7 +128,7 @@ kiran桌面是湖南麒麟信安团队以用户和市场需求为导向，研发
 
 
 
-
+#### 包管理工具
 
 
 另外Eulaceura采用了ZYpp作为包管理工具
