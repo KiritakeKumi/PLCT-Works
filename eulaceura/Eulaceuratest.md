@@ -5,6 +5,7 @@
 
 Eulaceura旨在为oerv提供一个较为稳定的发行版 今天就让我们一起来看看吧（跑
 
+https://repo.tarsier-infra.com/eulaceura/docs/README.txt
 
 ### 启动 Eulaceura 
 默认所提供的启动脚本是无法启动GUI的 但是可以直接拿oe的启动脚本改 下面是个抄作业的环节（
