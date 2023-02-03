@@ -1,6 +1,6 @@
 ### pujingyu
 
-截至目前主要工作是进行 Debian系列（Debian，ubuntu，openkylin） 以及整体的观测工作 并进行openkylin方面打包工作
+BJ67
 
 
 
@@ -34,6 +34,12 @@
 2.更新openeuler支持情况
 
 3.添加openeuler java lua 测试报告
+
+- [update openSUSE](https://github.com/isrc-cas/tarsier-meta/pull/78)
+
+- [update openSUSE](https://github.com/isrc-cas/tarsier-meta/pull/77)
+
+- [Update gentoo/openeular package](https://github.com/isrc-cas/tarsier-meta/pull/76)
 
 
 **直观可见内容可前往以下查找：**
