@@ -22,7 +22,7 @@
 
 
 
-![image-20231205152644079](C:\Users\Nico\AppData\Roaming\Typora\typora-user-images\image-20231205152644079.png)
+![image-20231205153116857](C:\Users\Nico\Documents\GitHub\PLCT-Works\revyos-issues\issues-7.assets\image-20231205153116857.png)
 
 
 
@@ -32,7 +32,11 @@
 
 
 
-![image-20231205152812605](C:\Users\Nico\AppData\Roaming\Typora\typora-user-images\image-20231205152812605.png)
+![image-20231205153130509](C:\Users\Nico\Documents\GitHub\PLCT-Works\revyos-issues\issues-7.assets\image-20231205153130509.png)
+
+
+
+![image-20231205153205672](C:\Users\Nico\Documents\GitHub\PLCT-Works\revyos-issues\issues-7.assets\image-20231205153205672.png)
 
 vlc本身可以正常识别文件音视频格式  但是音视频均无法输出（疑似后端ffmpeg问题）
 
