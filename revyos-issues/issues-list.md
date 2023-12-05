@@ -30,4 +30,4 @@ https://github.com/revyos/revyos/issues/35
 
 ### **无法解决/已转交：**
 
-https://github.com/revyos/revyos/issues/33
+https://github.com/revyos/revyos/issues/33 （涉及部分在PTG闭源内容）
