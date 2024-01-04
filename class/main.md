@@ -9,7 +9,7 @@
 从Imagination到NoitaniGami
 虹咲学园 Imagination 同好会
 
-（mesa21.3.8适配流程分享+性能问题追踪）
+（th1520 mesa21.3.8适配流程分享+性能问题追踪）
 
 主讲：nico
 
