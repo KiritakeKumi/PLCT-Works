@@ -15,6 +15,9 @@
 
 12集 2023.1.4起每周四更新 
 
+RevyOS Mesa: https://github.com/revyos/mesa
+
+Starfive Patch: https://github.com/starfive-tech/buildroot/tree/VF2_v3.0.4/package/mesa3d
 
 ### 一个像素的奇幻漂流 Sunshine
 
