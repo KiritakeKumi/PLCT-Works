@@ -20,7 +20,7 @@ RevyOS Mesa: https://github.com/revyos/mesa
 Starfive Patch: https://github.com/starfive-tech/buildroot/tree/VF2_v3.0.4/package/mesa3d
 
 
-EP1：https://www.bilibili.com/video/BV1MK411x7g2
+EP1: https://www.bilibili.com/video/BV1MK411x7g2
 
 EP2: https://www.bilibili.com/video/BV1NK4y1z7Qg
 
