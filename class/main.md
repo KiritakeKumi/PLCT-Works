@@ -21,8 +21,11 @@ Starfive Patch: https://github.com/starfive-tech/buildroot/tree/VF2_v3.0.4/packa
 
 
 EP1：https://www.bilibili.com/video/BV1MK411x7g2
+
 EP2: https://www.bilibili.com/video/BV1NK4y1z7Qg
+
 EP3: https://www.bilibili.com/video/BV1U64y1N7x3
+
 EP4: https://www.bilibili.com/video/BV17K42117QU
 
 
