@@ -9,7 +9,7 @@
 从Imagination到NoitaniGami
 虹咲学园 Imagination 同好会
 
-（th1520 mesa21.3.8适配流程分享+性能问题追踪）
+th1520 mesa21.3.8适配流程分享
 
 主讲：nico
 
@@ -18,6 +18,13 @@
 RevyOS Mesa: https://github.com/revyos/mesa
 
 Starfive Patch: https://github.com/starfive-tech/buildroot/tree/VF2_v3.0.4/package/mesa3d
+
+
+EP1：https://www.bilibili.com/video/BV1MK411x7g2
+EP2: https://www.bilibili.com/video/BV1NK4y1z7Qg
+EP3: https://www.bilibili.com/video/BV1U64y1N7x3
+EP4: https://www.bilibili.com/video/BV17K42117QU
+
 
 ### 一个像素的奇幻漂流 Sunshine
 
