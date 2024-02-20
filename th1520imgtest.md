@@ -38,7 +38,7 @@ https://github.com/revyos/docs/blob/master/docs/benchmark/glmark2.md
 
 目前的测试方法可以对x11-glesv2以及vulkan进行测试。
 
-在上述两个测试可以运行且运行完毕（不考虑分数）的情况下可以开始该测试。
+在上述两个测试可以单次运行且运行完毕（不考虑分数）的情况下可以开始该测试，否则视为失败。
 
 
 使用vkcube进行测试，可以正常运行并显示GPU型号视为通过。
