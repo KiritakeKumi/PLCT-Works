@@ -9,16 +9,27 @@
 从Imagination到NoitaniGami
 虹咲学园 Imagination 同好会
 
-th1520 mesa21.3.8适配流程分享
+Th1520 Mesa21.3.8适配流程分享
 
 主讲：nico
 
-12集 2023.1.4起每周四更新 
+8集 2023.1.4起每周四更新 （如遇意外情况可能推迟）
+
+大纲：
+
+1. OpenGL Patch 方面的处理（1-4）
+
+2. Vulkan Patch 方面的处理（5-6）
+
+3. 测试以及特殊打包流程的处理（7-8）
+
+学习资料：
 
 RevyOS Mesa: https://github.com/revyos/mesa
 
 Starfive Patch: https://github.com/starfive-tech/buildroot/tree/VF2_v3.0.4/package/mesa3d
 
+章节直达
 
 EP1: https://www.bilibili.com/video/BV1MK411x7g2
 
