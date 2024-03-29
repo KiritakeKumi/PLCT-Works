@@ -20,7 +20,7 @@ jobs:
     - name: Build QEMU
       run: |
         cd qemu-8.2.2
-        ./configure --target-list=riscv64-softmmu,riscv64-linux-user --prefix=/usr
+        ./configure --target-list=riscv64-softmmu,riscv64-linux-user --prefix=/usr --enable-user-network
         make
 
     - name: Install QEMU
