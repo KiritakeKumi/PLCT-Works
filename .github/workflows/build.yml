@@ -28,8 +28,10 @@ jobs:
         cd qemu-8.2.2
         sudo make install
 
-    - name: Check QEMU version
-      run: qemu-system-riscv64 --version
+    - name: Verify QEMU installation
+      run: |
+        qemu-system-riscv64 --version
+        qemu-system-riscv64 -netdev help
 
     - name: Download Ubuntu for RISC-V
       run: |
