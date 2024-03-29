@@ -1,0 +1,48 @@
+name: Build and Run QEMU
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libpixman-1-dev zlib1g-dev libglib2.0-dev ninja-build
+
+    - name: Download QEMU
+      run: |
+        wget https://download.qemu.org/qemu-8.2.2.tar.xz
+        tar xf qemu-8.2.2.tar.xz
+
+    - name: Build QEMU
+      run: |
+        cd qemu-8.2.2
+        ./configure --target-list=riscv64-softmmu,riscv64-linux-user --prefix=/usr/bin
+        make
+
+    - name: Install QEMU
+      run: |
+        cd qemu-8.2.2
+        sudo make install
+
+    - name: Check QEMU version
+      run: qemu-system-riscv64 --version
+
+    - name: Download Ubuntu for RISC-V
+      run: |
+        wget https://cdimage.ubuntu.com/releases/22.04.4/release/ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img.xz
+        xz -d ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img.xz
+
+    - name: Run QEMU with Ubuntu
+      run: |
+        qemu-system-riscv64 \
+          -machine virt -nographic -m 5000 -smp 2 \
+          -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.bin \
+          -kernel /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf \
+          -device virtio-net-device,netdev=eth0 -netdev user,id=eth0 \
+          -device virtio-rng-pci \
+          -cpu rv64,v=true,vlen=256,vext_spec=v1.0 \
+          -drive file=ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio
