@@ -48,7 +48,7 @@ jobs:
           -device virtio-rng-pci \
           -cpu rv64,v=true,vlen=256,vext_spec=v1.0 \
           -drive file=ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio
-      timeout-minutes: 10
+      timeout-minutes: 200
       continue-on-error: true
 
     - name: Interact with QEMU
