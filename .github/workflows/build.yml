@@ -38,7 +38,7 @@ jobs:
         wget https://cdimage.ubuntu.com/releases/22.04.4/release/ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img.xz
         xz -d ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img.xz
 
-    - name: Run QEMU with Ubuntu
+    - name: Run Ubuntu in QEMU (in background)
       run: |
         qemu-system-riscv64 \
           -machine virt -nographic -m 5000 -smp 2 \
@@ -46,13 +46,8 @@ jobs:
           -kernel /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf \
           -device virtio-net-device,netdev=eth0 -netdev user,id=eth0 \
           -device virtio-rng-pci \
-          -cpu rv64,v=true,vlen=256,vext_spec=v1.0 \
-          -drive file=ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio
-      timeout-minutes: 200
-      continue-on-error: true
-
-    - name: Interact with QEMU
+         -drive file=ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio &
+      
+    - name: Continue with next commands
       run: |
-        sleep 480
-        echo "ubuntu" | nc -N localhost 23
-        echo "ubuntu" | nc -N localhost 23
+        echo "执行后续命令..."
