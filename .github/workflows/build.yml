@@ -44,10 +44,13 @@ jobs:
           -machine virt -nographic -m 5000 -smp 2 \
           -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.bin \
           -kernel /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf \
-          -device virtio-net-device,netdev=eth0 -netdev user,id=eth0 \
+          -device virtio-net-device,netdev=eth0 -netdev user,id=eth0,hostfwd=tcp::2222-:22 \
           -device virtio-rng-pci \
-         -drive file=ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio &
+          -drive file=ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio &
+          sleep 300
       
-    - name: Continue with next commands
+    - name: SSH connection 
       run: |
-        echo "执行后续命令..."
+        sshpass -p ubuntu ssh -o StrictHostKeyChecking=no ubuntu@127.0.0.1 -p 2222
+      env:
+        SSHPASS: ubuntu
