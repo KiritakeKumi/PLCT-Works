@@ -10,7 +10,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential libpixman-1-dev zlib1g-dev libglib2.0-dev ninja-build qemu-system-misc opensbi u-boot-qemu qemu-utils
+        sudo apt-get install -y build-essential libpixman-1-dev zlib1g-dev libglib2.0-dev ninja-build qemu-system-misc opensbi u-boot-qemu qemu-utils axel
 
     - name: Download QEMU
       run: |
@@ -35,14 +35,12 @@ jobs:
 
     - name: Download Ubuntu for RISC-V
       run: |
-        wget https://cdimage.ubuntu.com/releases/22.04.4/release/ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img.xz
-        xz -d ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img.xz
+        axel -n 16 https://niconiconi.us/ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img
 
     - name: Run Ubuntu in QEMU (in background)
       run: |
         qemu-system-riscv64 \
           -machine virt -nographic -m 5000 -smp 2 \
-          -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.bin \
           -kernel /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf \
           -device virtio-net-device,netdev=eth0 -netdev user,id=eth0,hostfwd=tcp::2222-:22 \
           -device virtio-rng-pci \
@@ -50,8 +48,8 @@ jobs:
           -drive file=ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio &
           sleep 600
       
-    - name: SSH connection 
+    - name: SSH into the QEMU instance
       run: |
-        sshpass -p ubuntu ssh -o StrictHostKeyChecking=no ubuntu@127.0.0.1 -p 2222
+        sshpass -p 'niconi' ssh -o StrictHostKeyChecking=no root@127.0.0.1 -p 2222
       env:
-        SSHPASS: ubuntu
+        SSHPASS: niconi
