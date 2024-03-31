@@ -46,8 +46,9 @@ jobs:
           -kernel /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf \
           -device virtio-net-device,netdev=eth0 -netdev user,id=eth0,hostfwd=tcp::2222-:22 \
           -device virtio-rng-pci \
+          -cpu rv64,v=true,vlen=256,vext_spec=v1.0 \
           -drive file=ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio &
-          sleep 300
+          sleep 600
       
     - name: SSH connection 
       run: |
