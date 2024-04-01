@@ -52,11 +52,12 @@ jobs:
       run: |
         sshpass -p 'niconi' ssh -o StrictHostKeyChecking=no root@127.0.0.1 -p 2222
         sudo apt-get update
-        sudo apt-get install -y build-essential python3-dev python3-setuptools python3-pip libatlas-base-dev gfortran
+        sudo apt-get install -y build-essential python3-dev python3-setuptools python3-pip libatlas-base-dev gfortran clang llvm
         git clone https://github.com/xianyi/OpenBLAS.git
         cd OpenBLAS
         make HOSTCC=gcc TARGET=x280 NUM_THREADS=8 CC=riscv64-unknown-linux-gnu-clang FC=riscv64-unknown-linux-gnu-gfortran
         sudo make install
+        sudo make test
         cd
         git clone https://github.com/numpy/numpy.git
 
