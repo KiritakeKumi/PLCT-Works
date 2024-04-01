@@ -46,13 +46,18 @@ jobs:
           -device virtio-rng-pci \
           -cpu rv64,v=true,vlen=256,vext_spec=v1.0 \
           -drive file=ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio &
-          sleep 180
+          sleep 150
       
     - name: SSH into the QEMU instance
       run: |
         sshpass -p 'niconi' ssh -o StrictHostKeyChecking=no root@127.0.0.1 -p 2222
         sudo apt-get update
-        sudo apt-get install -y build-essential python3-dev python3-setuptools python3-pip libatlas-base-dev
+        sudo apt-get install -y build-essential python3-dev python3-setuptools python3-pip libatlas-base-dev gfortran
+        git clone https://github.com/xianyi/OpenBLAS.git
+        cd OpenBLAS
+        make HOSTCC=gcc TARGET=x280 NUM_THREADS=8 CC=riscv64-unknown-linux-gnu-clang FC=riscv64-unknown-linux-gnu-gfortran
+        sudo make install
+        cd
         git clone https://github.com/numpy/numpy.git
 
       env:
