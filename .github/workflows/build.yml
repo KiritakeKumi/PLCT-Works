@@ -51,9 +51,9 @@ jobs:
     - name: SSH into the QEMU instance
       run: |
         sshpass -p 'niconi' ssh -o StrictHostKeyChecking=no root@127.0.0.1 -p 2222
-        apt update
-        apt install -y build-essential python3-dev python3-setuptools python3-pip libatlas-base-dev
+        sudo apt-get update
+        sudo apt-get install -y build-essential python3-dev python3-setuptools python3-pip libatlas-base-dev
         git clone https://github.com/numpy/numpy.git
-        
+
       env:
         SSHPASS: niconi
