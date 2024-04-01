@@ -14,7 +14,7 @@ jobs:
 
     - name: Download QEMU
       run: |
-        wget https://download.qemu.org/qemu-8.2.2.tar.xz
+        wget https://niconiconi.us/qemu-8.2.2.tar.xz
         tar xf qemu-8.2.2.tar.xz
 
     - name: Build QEMU
