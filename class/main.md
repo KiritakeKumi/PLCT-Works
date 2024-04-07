@@ -39,6 +39,8 @@ EP3: https://www.bilibili.com/video/BV1U64y1N7x3
 
 EP4: https://www.bilibili.com/video/BV17K42117QU
 
+EP5: https://www.bilibili.com/video/BV1KZ421175g
+
 
 ### 一个像素的奇幻漂流 Sunshine
 
