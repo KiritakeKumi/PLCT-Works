@@ -48,5 +48,7 @@ ALTER ROLE wbadm CREATEROLE;
 Import roles.sql and main-tables.sql.
 
 
-psql -h 127.0.0.1 -p 5432 -U wbadm -d postgres -f /srv/wanna-build/schema/roles.sql
-psql -h 127.0.0.1 -p 5432 -U wbadm -d postgres -f /srv/wanna-build/schema/main-tables.sql
+psql -h 127.0.0.1 -p 5432 -U wb -d postgres -f /srv/wanna-build/schema/roles.sql
+psql -h 127.0.0.1 -p 5432 -U wb -d postgres -f /srv/wanna-build/schema/main-tables.sql
+
+*需要使用密码
