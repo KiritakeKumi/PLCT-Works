@@ -115,7 +115,7 @@ vim /etc/postgresql/*/main/pg_hba.conf
 local   all             wbadm                                   trust
 ```
 
-
+/etc/init.d/postgresql restart
 
 
 ## 运行
