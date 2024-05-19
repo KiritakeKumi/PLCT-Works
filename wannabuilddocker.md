@@ -13,6 +13,9 @@ docker pull postgres
 
 docker run --name wbpostgres -e POSTGRES_USER=wb -e POSTGRES_PASSWORD=niconicowb@buildtest -e POSTGRES_DB=mydatabase -p 5432:5432 -d postgres
 
+
+docker run --name wannabuild –net=host -d debian:bookworm
+
 psql -h 127.0.0.1 -p 5432 -U wb -d postgres
 
 输入密码
@@ -32,7 +35,7 @@ ALTER ROLE wbadm CREATEROLE;
 Import roles.sql and main-tables.sql.
 
 
-psql -h 127.0.0.1 -p 5432 -U wb -d postgres -f /srv/wanna-build/schema/roles.sql
-psql -h 127.0.0.1 -p 5432 -U wb -d postgres -f /srv/wanna-build/schema/main-tables.sql
+psql -h 127.0.0.1 -p 5432 -U wb -d wannadb -f /srv/wanna-build/schema/roles.sql
+psql -h 127.0.0.1 -p 5432 -U wb -d wannadb -f /srv/wanna-build/schema/main-tables.sql
 
 *需要使用密码
