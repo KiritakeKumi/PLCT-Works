@@ -32,7 +32,7 @@ ln -s /srv/wanna-build/bin/wanna-build /usr/local/bin/wanna-build
 原文批注：Note that /srv is hardcoded in wanna-build.
 
 
-## 安装数据库 
+### 安装数据库 
 
 
 安装 postgresql
@@ -122,7 +122,7 @@ local   all             wbadm                                   trust
 /etc/init.d/postgresql restart
 
 
-## 运行
+### 测试运行
 
 
 如果你的安装正常，现在直接敲 wanna-build 可以看到相关输出
