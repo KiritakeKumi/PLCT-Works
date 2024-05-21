@@ -235,3 +235,23 @@ cd /var/lib/buildd/.ssh/
 cat id_rsa.pub > authorized_keys
 ssh 127.0.0.1
 ```
+
+
+## 启动
+
+```
+su - wbadm
+
+cd /srv/wanna-build/triggers/
+
+./trigger.local
+
+exit
+```
+
+trigger.local 文件请根据实际情况来，此处仅为本地测试用
+
+```
+/etc/init.d/buildd start
+```
+启动buildd进程
