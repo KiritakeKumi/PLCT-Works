@@ -329,3 +329,11 @@ trigger.local 文件请根据实际情况来，此处仅为本地测试用
 /etc/init.d/buildd start
 ```
 启动buildd进程
+
+请通过以下文件查看日志
+
+```
+cat /var/log/buildd.log
+
+
+```
