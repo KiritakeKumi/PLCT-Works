@@ -7,6 +7,23 @@ Debian 12 x86
 
 wanna-build 可以和 Buildd  Sbuild 运行在不同的服务器上。
 
+
+在 Debian 的包编译和构建过程中，wanna-build、Buildd 和 Sbuild 是三个关键的组件，它们相互协作以确保软件包的正确构建和维护。这里简要介绍它们的功能和关系：
+
+wanna-build：
+
+wanna-build 是一个数据库系统，用于追踪软件包的构建状态。它记录了哪些包需要被构建、已经成功或失败构建的包，以及这些包是否需要重新构建。wanna-build 管理着与构建相关的各种数据，比如版本、构建依赖和构建日志的位置。
+
+Buildd：
+
+Buildd 是指构建守护进程，其作用是周期性地从 wanna-build 数据库获取需要构建的包列表，并启动构建过程。Buildd 会处理软件包的构建队列，并根据 wanna-build 数据库中的信息决定哪些包需要构建或重新构建。
+
+Sbuild：
+
+Sbuild 是实际进行包构建的工具。它为 Debian 软件包的构建提供了一个干净的 chroot 环境。Sbuild 负责在这个隔离的环境中配置必要的依赖，编译软件包，并生成可安装的包文件。它确保构建过程不会受到主机环境的干扰，从而提高包构建的可重复性和可靠性。
+
+总结起来，wanna-build 管理和跟踪包的构建状态，Buildd 是从 wanna-build 获取数据并管理构建队列的守护进程，而 Sbuild 是在隔离的环境中实际执行构建任务的工具。这三者共同工作，确保 Debian 软件包的有效、高效构建。
+
 ## wanna-build 安装
 
 ### 软件包依赖安装
@@ -126,6 +143,63 @@ local   all             wbadm                                   trust
 
 
 如果你的安装正常，现在直接敲 wanna-build 可以看到相关输出
+
+
+接下来还需要向数据库中加入一些数据
+
+写入支持的架构和发行版。
+
+```
+INSERT INTO distributions(distribution,build_dep_resolver) VALUES ('sid','apt');
+
+INSERT INTO architectures(architecture) VALUES ('amd64'),('i386');
+
+INSERT INTO distribution_architectures(distribution,architecture,archive) VALUES ('sid','amd64','debian'),('sid','i386','debian');
+
+INSERT INTO locks(distribution,architecture) VALUES ('sid','amd64'),('sid','i386');
+```
+
+设置发行版的别名。
+
+```
+INSERT INTO distribution_aliases(distribution,alias) VALUES('sid','unstable');
+```
+
+
+当设置本地wanna-build数据库时，我们必须为每个套件提供一个当前的“ Packages-arch-specific ”文件，这是wanna-build操作所需要的。它的路径在 /srv/wanna-build/triggers/common 中的变量 $PAS_BASE 和 $PAS_FILE 中定义。使用预定义路径时，可以使用以下命令安装该文件：
+
+```
+su
+
+SUITE=sid
+
+mkdir -p /srv/buildd.debian.org/web/quinn-diff/${SUITE}
+
+cd /srv/buildd.debian.org/web/quinn-diff/${SUITE}/
+
+wget https://buildd.debian.org/quinn-diff/${SUITE}/
+Packages-arch-specific
+```
+
+
+如果从本地存储库获取包和源，可以使用 trigger.local 脚本，需要将脚本中的 REPOSITORY 变量更改为存储库所在的位置。
+
+trigger.local ：https://wiki.debian.org/DebianWannaBuildInfrastructureOnOneServer?action=AttachFile&do=view&target=trigger.local
+
+```
+# copy trigger.local into /srv/wanna-build/triggers
+
+su
+
+chmod a+x /srv/wanna-build/triggers/trigger.local
+
+su wbadm
+
+cd /srv/wanna-build/triggers
+
+./trigger.local
+
+```
 
 
 
