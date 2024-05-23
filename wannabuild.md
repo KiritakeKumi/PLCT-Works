@@ -310,6 +310,23 @@ cat id_rsa.pub > authorized_keys
 ssh 127.0.0.1
 ```
 
+## dak 安装 （Debian Archive Kit）
+
+apt install python3 python3-apt python3-psycopg2
+
+
+git clone https://salsa.debian.org/ftp-team/dak.git
+cd dak
+
+sudo -u postgres createuser -P dak
+sudo -u postgres createdb -O dak dakdb
+
+
+sudo -u postgres psql -d dakdb
+
+
+
+
 
 ## 启动
 
