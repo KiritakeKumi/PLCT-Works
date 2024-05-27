@@ -312,19 +312,43 @@ ssh 127.0.0.1
 
 ## dak 安装 （Debian Archive Kit）
 
-apt install python3 python3-apt python3-psycopg2
 
+官方文档：https://salsa.debian.org/ftp-team/dak/-/tree/master/setup
+
+
+apt install python3-psycopg2 python3-sqlalchemy python3-apt gnupg dpkg-dev lintian binutils-multiarch python3-yaml less python3-ldap python3-pyrss2gen python3-rrdtool symlinks python3-debian python3-debianbts python3-tabulate
+
+cd /srv
 
 git clone https://salsa.debian.org/ftp-team/dak.git
+
 cd dak
 
-sudo -u postgres createuser -P dak
-sudo -u postgres createdb -O dak dakdb
+设置 dak 用户：
+
+sudo addgroup ftpmaster
+sudo adduser dak --disabled-login --ingroup ftpmaster --shell /bin/bash
 
 
-sudo -u postgres psql -d dakdb
+设置 dak 目录：
+
+sudo mkdir /etc/dak
+sudo mkdir /srv/dak
 
 
+在 /etc/dak 中创建到 /srv/dak/etc/dak.conf 的符号链接（实际文件将由安装脚本创建）：
+
+sudo ln -s /srv/dak/etc/dak.conf /etc/dak/dak.conf
+
+
+此脚本完成其余工作。它使用 init_vars 中设置的通用变量，如果需要，可以自定义这些变量：
+
+setup/dak-setup.sh
+
+
+上述脚本将 dak.py 脚本符号链接到 /srv/dak/bin/dak，您还应该更新 PATH 变量以便能够执行 dak：
+
+export PATH="/srv/dak/bin:${PATH}"
 
 
 
