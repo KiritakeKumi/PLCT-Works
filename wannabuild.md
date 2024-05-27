@@ -316,7 +316,12 @@ ssh 127.0.0.1
 官方文档：https://salsa.debian.org/ftp-team/dak/-/tree/master/setup
 
 
+基础软件包安装
+
+```
 apt install python3-psycopg2 python3-sqlalchemy python3-apt gnupg dpkg-dev lintian binutils-multiarch python3-yaml less python3-ldap python3-pyrss2gen python3-rrdtool symlinks python3-debian python3-debianbts python3-tabulate
+```
+
 
 cd /srv
 
@@ -336,7 +341,7 @@ sudo mkdir /etc/dak
 sudo mkdir /srv/dak
 
 
-在 /etc/dak 中创建到 /srv/dak/etc/dak.conf 的符号链接（实际文件将由安装脚本创建）：
+创建符号链接（实际文件将由安装脚本创建）：
 
 sudo ln -s /srv/dak/etc/dak.conf /etc/dak/dak.conf
 
@@ -346,7 +351,7 @@ sudo ln -s /srv/dak/etc/dak.conf /etc/dak/dak.conf
 setup/dak-setup.sh
 
 
-上述脚本将 dak.py 脚本符号链接到 /srv/dak/bin/dak，您还应该更新 PATH 变量以便能够执行 dak：
+添加系统变量：
 
 export PATH="/srv/dak/bin:${PATH}"
 
