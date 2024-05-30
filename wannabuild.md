@@ -390,13 +390,17 @@ cat /var/log/buildd.log
 
 ### wanna-build 多repo共存
 
+官方对于wanna-build的文档仍然停留在13年前，内容主要是各个构建状态的情况，并没有提到程序部署的具体细节 
+
+https://salsa.debian.org/wb-team/wanna-build/-/blob/master/states.txt
+
 目前已知的多repo方法为为每个仓库创建一个单独的数据库，以隔离不同仓库的数据。
 
 启用多个wanna-build 实例 配置不同的数据库连接信息来实现多repo
 
 关于数据库相关操作的官方阐述：https://salsa.debian.org/wb-team/wanna-build/-/blob/master/schema/README
 
-但是此处并没有说明如何操作，或许仍需容器化来实现多个实例
+但是此处并没有说明如何操作，数据库相关操作也并没有像Buildd通过独立文件那样方便控制，或许仍需容器化来实现多个实例
 
 
 ### wanna-build 运行检测rebuild
