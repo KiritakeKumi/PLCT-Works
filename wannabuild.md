@@ -388,7 +388,7 @@ cat /var/log/buildd.log
 
 ## 后续
 
-### wanna-build 多版本共存
+### wanna-build 多repo共存
 
 目前已知的多repo方法为为每个仓库创建一个单独的数据库，以隔离不同仓库的数据。
 
@@ -396,14 +396,25 @@ cat /var/log/buildd.log
 
 关于数据库相关操作的官方阐述：https://salsa.debian.org/wb-team/wanna-build/-/blob/master/schema/README
 
-但是此处并没有说明如何操作
+但是此处并没有说明如何操作，或许仍需容器化来实现多个实例
 
 
-### wanna-build 运行检测
+### wanna-build 运行检测rebuild
 
 
 wanna-build本质是几个perl和python脚本组成的脚本群，核心的数据均存储在数据库中，也就是说构建成功与否均来自后端 Buildd  Sbuild 的指令。
+
 （官方阐述在此处：https://salsa.debian.org/wb-team/wanna-build/-/blob/master/states.txt）
 
-同时上文给出了各个构建状态
+同时上文给出了各个构建状态，大体分为初始构建和最终状态，构建失败（Failed）状态由Buildd来给出
+
+首先是列出所有标记为构建失败的包
+```
+wanna-build --list=failed
+```
+更新这些包的状态，使其从“Failed”变为“Needs-Build”
+```
+wanna-build --requeue --dist=unstable package-name
+```
+package-name 需要替换为实际的包名，--dist=unstable 参数指定发行版，状态更新后，包将自动进入 Buildd 管理的构建队列等待重新构建。Buildd 作为构建守护进程，会周期性地检查哪些包处于“Needs-Build”状态。
 
