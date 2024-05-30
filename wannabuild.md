@@ -390,3 +390,9 @@ cat /var/log/buildd.log
 
 ### wanna-build 多版本共存
 
+
+
+### wanna-build 运行检测
+
+
+wanna-build本质是几个perl和python脚本组成的脚本群，核心的数据均存储在数据库中，也就是说构建成功与否均来自后端 Buildd  Sbuild 的指令。
