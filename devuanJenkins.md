@@ -1,6 +1,6 @@
-# Devuan的Jenkins部署
+# Debian的Jenkins部署
 
-## 大致情况
+## Devuan方面大致情况
 
  Jenkinsfile配置文件位于下方
 
@@ -126,5 +126,7 @@ pipeline {
     }
 }
 ```
+
+**此处其实就可以引入Devuan的那个pipeline脚本了（见最上文）**
 
 dpkg-buildpackage 命令被用来构建 Debian 包，archiveArtifacts 步骤则用来保存构建生成的 .deb 文件。
