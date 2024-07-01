@@ -12,4 +12,12 @@
 
  https://git.devuan.org/devuan/package-pipeline/src/branch/testing
 
+
+
+ ## 安装Jenkins
+
+ https://www.jenkins.io/doc/book/installing/linux/、
+
+ 目标平台 Debian amd64 x64 12
+
  
