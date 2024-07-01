@@ -90,3 +90,41 @@ Post-build Actions 选择 Retry build after failure
 
 
 ![image-20240701110335482](image-20240701110335482.png)
+
+## 如何使用Jenkins构建Debian软件包deb
+
+分为两种方法，但是第一种暂不可用
+
+### Debian Package Builder
+
+这个是一个插件，非常方便，但是目前存在安全漏洞还未修复，处于下架状态
+
+https://www.jenkins.io/security/plugins/#suspensions
+
+https://plugins.jenkins.io/debian-package-builder/
+
+https://www.jenkins.io/security/advisory/2022-01-12/#SECURITY-2546
+
+### Jenkins Pipeline
+
+这个是手动写一个脚本来实现操作
+
+示例：
+
+
+```
+pipeline {
+    agent any
+    stages {
+        stage('Build Debian Package') {
+            steps {
+                sh 'dpkg-buildpackage -us -uc'
+                // 使用 archiving step 来保存输出的 .deb 包
+                archiveArtifacts artifacts: '*.deb', fingerprint: true
+            }
+        }
+    }
+}
+```
+
+dpkg-buildpackage 命令被用来构建 Debian 包，archiveArtifacts 步骤则用来保存构建生成的 .deb 文件。
