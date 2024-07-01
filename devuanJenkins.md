@@ -1,5 +1,9 @@
 # Debian的Jenkins部署
 
+能用，甚至比Wanna-Build+Buildd+Sbuild功能方便且方便管理
+
+而且有很多现有插件，不用遇到需求造轮子，文档也较为齐全
+
 ## Devuan方面大致情况
 
  Jenkinsfile配置文件位于下方
@@ -127,6 +131,23 @@ pipeline {
 }
 ```
 
-**此处其实就可以引入Devuan的那个pipeline脚本了（见最上文）**
+**此处其实就可以引入Devuan的那个pipeline脚本了（见最上文）  其实也是下文内容**
 
 dpkg-buildpackage 命令被用来构建 Debian 包，archiveArtifacts 步骤则用来保存构建生成的 .deb 文件。
+
+
+## Jenkins Pipeline 怎么创建/使用
+
+控制台页面点击 New Item 输入项目名称，选择 Pipeline 类型，然后点击 OK。
+
+
+Configure，划到最下方 Pipeline 部分。
+
+
+贴入上方内容
+
+ https://git.devuan.org/devuan/package-pipeline/src/branch/deployment
+
+可以跑起来，不过正式环境还需要修改一下，需要根据届时实际情况看看
+
+另外这个脚本本质也是调用的 dpkg-buildpackage 
