@@ -329,3 +329,14 @@ Traceback (most recent call last):
     import PluginLoader
 ModuleNotFoundError: No module named 'PluginLoader'
 ---------------------------------------------------
+
+g：1/2/3/4/5/7/8/  12/13/14/17/18/19/20/  25/26/28/29/30/   38/39/40/41   /46/48/66/71
+a：1/2/3/4/5/7/8/  12/13/   17/18/19/20/  25/26/28/   30/32                  /66
+
+s：1/        7/8/11                            /28                     /42
+d: 1/  3/                         19/   21     /28                     /42
+
+g=googlepixel4xl 
+a=iphone15pro 
+s=softbank band 
+d=docomo band
