@@ -11,6 +11,8 @@ https://dingjingmaster.github.io/2023/07/0014-launchpad%E6%90%AD%E5%BB%BA/
 
 此方法需要主机只运行Launchpad，同时相关组件版本对齐
 
+系统 Ubuntu 20.04 Python3.8
+
 克隆 Launchpad 源代码： 从 Launchpad 的 Git 仓库克隆代码：
 ```
 git clone https://git.launchpad.net/launchpad
