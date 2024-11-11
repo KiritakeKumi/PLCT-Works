@@ -91,3 +91,52 @@ make run
 ```
 lxc list
 ```
+
+
+## 构建设备配置
+
+基础环境安装
+```
+sudo apt update
+sudo apt install sbuild ubuntu-dev-tools debootstrap
+```
+
+创建 sbuild 环境
+```
+sudo mk-sbuild --arch=riscv64 focal
+```
+
+配置 sbuild 环境
+
+编辑 /etc/schroot/chroot.d/ 下的配置文件
+
+```
+[focal-riscv64-sbuild]
+description=Ubuntu 20.04 riscv64 sbuild
+directory=/srv/chroot/focal-riscv64-sbuild
+root-users=root
+type=directory
+profile=sbuild
+users=YOUR_USERNAME
+```
+
+配置 buildd
+
+编辑 /etc/buildd/buildd.conf
+```
+BUILD_ARCH=riscv64
+BUILD_CHROOT=riscv64-unstable
+```
+
+启动服务
+```
+sudo systemctl start buildd
+```
+
+在Launchpad的管理页面中进行连接
+
+配置访问密钥，然后在构建机上导入
+```
+export LAUNCHPAD_BUILDER_API="http://your-launchpad-instance/api/devel/"
+export LAUNCHPAD_BUILDER_KEY="/path/to/your/private/key"
+```
