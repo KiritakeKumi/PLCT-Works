@@ -30,6 +30,7 @@ cd launchpad
 数据库配置： 执行数据库初始化和配置，确保所有的服务和表都已正确设置：
 
 ```
+./utilities/launchpad-database-setup $USER
 make schema
 ```
 启动 Launchpad
@@ -38,59 +39,39 @@ make schema
 make run
 ```
 
-## 部署（使用容器）
-
-安装 LXD
-
+默认使用127.0.0.88服务，如需调整ip 请执行
+```
+sudo make LISTEN_ADDRESS='*' install
+```
+在访问的机器上按照如下配置hosts文件
+```
+# Launchpad virtual domains. This should be on one line.
+<your container IPv4 address>     launchpad.test answers.launchpad.test archive.launchpad.test api.launchpad.test bazaar.launchpad.test bazaar-internal.launchpad.test blueprints.launchpad.test bugs.launchpad.test code.launchpad.test feeds.launchpad.test keyserver.launchpad.test lists.launchpad.test ppa.launchpad.test private-ppa.launchpad.test testopenid.test translations.launchpad.test xmlrpc-private.launchpad.test xmlrpc.launchpad.test
 ```
 
-sudo snap install lxd
-sudo lxd init --auto
-```
 
-创建容器
-```
-lxc launch ubuntu:20.04 launchpad-container
-```
-设置网络
 
-此处实例的采用的是桥接方式 接口为br0 仅供参考 请以实际部署为准
+使用 admin@canonical.com 账号在 launchpad.test 登录
+
+向数据库中添加riscv构建机参数 无需重启 修改完毕即生效
 
 ```
-lxc network attach br0 launchpad-container eth0
-```
-把容器的接口 eth0 桥接到 br0 
+\c launchpad_dev  
 
-安装依赖
+进入 launchpad_dev 数据表
 
+INSERT INTO public.processor (id, name, title, description, restricted, build_by_default, supports_nonvirtualized, supports_virtualized) VALUES (4, 'riscv
+64', 'RISC-V 64bit', 'RISC-V 64bit', false, true, true, true);
 ```
-lxc exec launchpad-container -- sudo apt update
-lxc exec launchpad-container -- sudo apt install python3.8 postgresql rabbitmq-server git
-```
-下载Launchpad
 
-在容器内克隆并设置 Launchpad：
+在 https://launchpad.test/builders/+new 添加构建机器
 
-```
-lxc exec launchpad-container -- bash
-git clone https://git.launchpad.net/launchpad
-cd launchpad
-./utilities/rocketfuel-setup
-```
-数据库初始化
 
-```
-make schema
-```
-启动 Launchpad
+Open resources: (Optional)  此处可写入构建机器的Tag
 
-```
-make run
-```
-通过下面的命令确定设备IP通过浏览器访问
-```
-lxc list
-```
+Resource tags offered by this builder, that can be required by a build and if required must match.
+
+
 
 
 ## 构建设备配置
