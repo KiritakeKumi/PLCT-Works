@@ -53,6 +53,8 @@ sudo make LISTEN_ADDRESS='*' install
 
 使用 admin@canonical.com 账号在 launchpad.test 登录
 
+
+
 向数据库中添加riscv构建机参数 无需重启 修改完毕即生效
 
 ```
@@ -76,48 +78,58 @@ Resource tags offered by this builder, that can be required by a build and if re
 
 ## 构建设备配置
 
-基础环境安装
-```
-sudo apt update
-sudo apt install sbuild ubuntu-dev-tools debootstrap
-```
 
-创建 sbuild 环境
-```
-sudo mk-sbuild --arch=riscv64 focal
-```
+获取程序buildd
 
-配置 sbuild 环境
+$ sudo apt install git
+$ git clone https://git.launchpad.net/launchpad-buildd
 
-编辑 /etc/schroot/chroot.d/ 下的配置文件
+安装依赖项
 
-```
-[focal-riscv64-sbuild]
-description=Ubuntu 20.04 riscv64 sbuild
-directory=/srv/chroot/focal-riscv64-sbuild
-root-users=root
-type=directory
-profile=sbuild
-users=YOUR_USERNAME
-```
+$ cd launchpad-buildd
+$ sudo apt-add-repository ppa:launchpad/ubuntu/buildd-staging
+$ sudo apt-add-repository ppa:launchpad/ubuntu/ppa
+$ vi /etc/apt/sources.list.d/launchpad-ubuntu-ppa-bionic.list <uncomment deb-src line>
+$ sudo apt update
+$ sudo apt build-dep launchpad-buildd fakeroot
+$ sudo apt install -f
 
-配置 buildd
+注意：如果fakeroot找不到请尝试：
 
-编辑 /etc/buildd/buildd.conf
-```
-BUILD_ARCH=riscv64
-BUILD_CHROOT=riscv64-unstable
-```
+$ sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+$ sudo apt-get update
+$ sudo apt build-dep launchpad-buildd fakeroot
+$ sudo apt install -f
 
-启动服务
-```
-sudo systemctl start buildd
-```
+制作软件包
 
-在Launchpad的管理页面中进行连接
+$ cd launchpad-buildd
+$ make
+$ cd ..
+$ sudo dpkg -i ./python3-lpbuildd_<version>_all.deb ./launchpad-buildd_<version>_all.deb
 
-配置访问密钥，然后在构建机上导入
-```
-export LAUNCHPAD_BUILDER_API="http://your-launchpad-instance/api/devel/"
-export LAUNCHPAD_BUILDER_KEY="/path/to/your/private/key"
-```
+$ git clone https://git.launchpad.net/ubuntu-archive-tools
+$ sudo apt install python3-launchpadlib python3-ubuntutools
+
+下载 chroot 镜像：
+
+./manage-chroot -s jammy -a riscv64 get
+sha1sum livecd.ubuntu-base.rootfs.tar.gz
+mv livecd.ubuntu-base.rootfs.tar.gz <sha1sum from previous line>
+sudo cp <sha1sum named file> /home/buildd/filecache-default
+sudo chown buildd: /home/buildd/filecache-default/<sha1sum named file>
+
+如果需要修改git相关位置可在launchpad/launchpad/configs/development/launchpad-lazr.conf 和 launchpad/launchpad/lib/lp/services/config/schema-lazr.conf
+修改git_browse_root、git_ssh_root等项目
+
+运行额外的服务（launchpad）
+
+utilities/start-dev-soyuz.sh
+utilities/soyuz-sampledata-setup.py
+make run
+
+在 https://launchpad.test/builders 上注册构建机器
+
+机器地址类似于 http://<buildd ip>:8221
+
+提交完毕后 大约30秒会在网页中显示为空闲状态，即连接成功
