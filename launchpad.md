@@ -82,12 +82,12 @@ Resource tags offered by this builder, that can be required by a build and if re
 **根据相关文档 riscv的构建机器为22.04 非20.04**
 
 获取程序buildd
-
+```
 $ sudo apt install git
 $ git clone https://git.launchpad.net/launchpad-buildd
-
+```
 安装依赖项
-
+```
 $ cd launchpad-buildd
 $ sudo apt-add-repository ppa:launchpad/ubuntu/buildd-staging
 $ sudo apt-add-repository ppa:launchpad/ubuntu/ppa
@@ -95,41 +95,43 @@ $ vi /etc/apt/sources.list.d/launchpad-ubuntu-ppa-bionic.list <uncomment deb-src
 $ sudo apt update
 $ sudo apt build-dep launchpad-buildd fakeroot
 $ sudo apt install -f
-
+```
 注意：如果fakeroot找不到请尝试：
-
+```
 $ sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
 $ sudo apt-get update
 $ sudo apt build-dep launchpad-buildd fakeroot
 $ sudo apt install -f
-
+```
 制作软件包
-
+```
 $ cd launchpad-buildd
 $ make
 $ cd ..
 $ sudo dpkg -i ./python3-lpbuildd_<version>_all.deb ./launchpad-buildd_<version>_all.deb
-
+```
+```
 $ git clone https://git.launchpad.net/ubuntu-archive-tools
 $ sudo apt install python3-launchpadlib python3-ubuntutools
-
+```
 下载 chroot 镜像：
-
+```
 ./manage-chroot -s jammy -a riscv64 get
 sha1sum livecd.ubuntu-base.rootfs.tar.gz
 mv livecd.ubuntu-base.rootfs.tar.gz <sha1sum from previous line>
 sudo cp <sha1sum named file> /home/buildd/filecache-default
 sudo chown buildd: /home/buildd/filecache-default/<sha1sum named file>
-
+```
 如果需要修改git相关位置可在launchpad/launchpad/configs/development/launchpad-lazr.conf 和 launchpad/launchpad/lib/lp/services/config/schema-lazr.conf
+
 修改git_browse_root、git_ssh_root等项目
 
 运行额外的服务（launchpad）
-
+```
 utilities/start-dev-soyuz.sh
 utilities/soyuz-sampledata-setup.py
 make run
-
+```
 在 https://launchpad.test/builders 上注册构建机器
 
 机器地址类似于 http://<buildd ip>:8221
