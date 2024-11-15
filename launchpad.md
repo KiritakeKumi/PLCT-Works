@@ -79,6 +79,8 @@ Resource tags offered by this builder, that can be required by a build and if re
 ## 构建设备配置
 
 
+**根据相关文档 riscv的构建机器为22.04 非20.04**
+
 获取程序buildd
 
 $ sudo apt install git
