@@ -78,13 +78,21 @@ INSERT INTO public.processor (id, name, title, description, restricted, build_by
 类似上述写法  VALUES 后的第一位数字请递增 作为该型号的内部识别id
 
 
+
+安装额外的构建组件
+```
+utilities/start-dev-soyuz.sh
+utilities/soyuz-sampledata-setup.py
+make run
+```
+
+
 在 https://launchpad.test/builders/+new 添加构建机器
 
 
 Open resources: (Optional)  此处可写入构建机器的Tag
 
 Resource tags offered by this builder, that can be required by a build and if required must match.
-
 
 
 
@@ -138,12 +146,7 @@ sudo chown buildd: /home/buildd/filecache-default/<sha1sum named file>
 
 修改git_browse_root、git_ssh_root等项目
 
-运行额外的服务（launchpad）
-```
-utilities/start-dev-soyuz.sh
-utilities/soyuz-sampledata-setup.py
-make run
-```
+
 在 https://launchpad.test/builders 上注册构建机器
 
 机器地址类似于 http://<buildd ip>:8221
