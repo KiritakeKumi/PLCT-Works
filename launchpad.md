@@ -66,6 +66,18 @@ INSERT INTO public.processor (id, name, title, description, restricted, build_by
 64', 'RISC-V 64bit', 'RISC-V 64bit', false, true, true, true);
 ```
 
+ps：如果要实现多指令多种核心 可以创建多个rv processor 编译时勾选对应的即可 需要创建相关的编译机器至少一台
+
+
+INSERT INTO public.processor (id, name, title, description, restricted, build_by_default, supports_nonvirtualized, supports_virtualized) VALUES (4, 'riscv
+64c907v', 'Xuantie RISC-V 64bit-C907-v', 'Xuantie RISC-V 64bit-C907-v', false, true, true, true);
+
+INSERT INTO public.processor (id, name, title, description, restricted, build_by_default, supports_nonvirtualized, supports_virtualized) VALUES (5, 'riscv
+64c907zba', 'Xuantie RISC-V 64bit-C907-zba', 'Xuantie RISC-V 64bit-C907-zba', false, true, true, true);
+
+类似上述写法  VALUES 后的第一位数字请递增 作为该型号的内部识别id
+
+
 在 https://launchpad.test/builders/+new 添加构建机器
 
 
