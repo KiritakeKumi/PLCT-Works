@@ -30,6 +30,7 @@ cd launchpad
 数据库配置： 执行数据库初始化和配置，确保所有的服务和表都已正确设置：
 
 ```
+./utilities/launchpad-database-setup $USER
 make schema
 ```
 启动 Launchpad
@@ -38,105 +39,116 @@ make schema
 make run
 ```
 
-## 部署（使用容器）
-
-安装 LXD
-
+默认使用127.0.0.88服务，如需调整ip 请执行
+```
+sudo make LISTEN_ADDRESS='*' install
+```
+在访问的机器上按照如下配置hosts文件
+```
+# Launchpad virtual domains. This should be on one line.
+<your container IPv4 address>     launchpad.test answers.launchpad.test archive.launchpad.test api.launchpad.test bazaar.launchpad.test bazaar-internal.launchpad.test blueprints.launchpad.test bugs.launchpad.test code.launchpad.test feeds.launchpad.test keyserver.launchpad.test lists.launchpad.test ppa.launchpad.test private-ppa.launchpad.test testopenid.test translations.launchpad.test xmlrpc-private.launchpad.test xmlrpc.launchpad.test
 ```
 
-sudo snap install lxd
-sudo lxd init --auto
-```
 
-创建容器
-```
-lxc launch ubuntu:20.04 launchpad-container
-```
-设置网络
 
-此处实例的采用的是桥接方式 接口为br0 仅供参考 请以实际部署为准
+使用 admin@canonical.com 账号在 launchpad.test 登录
+
+
+
+向数据库中添加riscv构建机参数 无需重启 修改完毕即生效
 
 ```
-lxc network attach br0 launchpad-container eth0
-```
-把容器的接口 eth0 桥接到 br0 
+\c launchpad_dev  
 
-安装依赖
+进入 launchpad_dev 数据表
 
+INSERT INTO public.processor (id, name, title, description, restricted, build_by_default, supports_nonvirtualized, supports_virtualized) VALUES (4, 'riscv
+64', 'RISC-V 64bit', 'RISC-V 64bit', false, true, true, true);
 ```
-lxc exec launchpad-container -- sudo apt update
-lxc exec launchpad-container -- sudo apt install python3.8 postgresql rabbitmq-server git
-```
-下载Launchpad
 
-在容器内克隆并设置 Launchpad：
+ps：如果要实现多指令多种核心 可以创建多个rv processor 编译时勾选对应的即可 需要创建相关的编译机器至少一台
 
-```
-lxc exec launchpad-container -- bash
-git clone https://git.launchpad.net/launchpad
-cd launchpad
-./utilities/rocketfuel-setup
-```
-数据库初始化
 
-```
-make schema
-```
-启动 Launchpad
+INSERT INTO public.processor (id, name, title, description, restricted, build_by_default, supports_nonvirtualized, supports_virtualized) VALUES (4, 'riscv
+64c907v', 'Xuantie RISC-V 64bit-C907-v', 'Xuantie RISC-V 64bit-C907-v', false, true, true, true);
 
+INSERT INTO public.processor (id, name, title, description, restricted, build_by_default, supports_nonvirtualized, supports_virtualized) VALUES (5, 'riscv
+64c907zba', 'Xuantie RISC-V 64bit-C907-zba', 'Xuantie RISC-V 64bit-C907-zba', false, true, true, true);
+
+类似上述写法  VALUES 后的第一位数字请递增 作为该型号的内部识别id
+
+
+
+安装额外的构建组件
 ```
+utilities/start-dev-soyuz.sh
+utilities/soyuz-sampledata-setup.py
 make run
 ```
-通过下面的命令确定设备IP通过浏览器访问
-```
-lxc list
-```
+
+
+在 https://launchpad.test/builders/+new 添加构建机器
+
+
+Open resources: (Optional)  此处可写入构建机器的Tag
+
+Resource tags offered by this builder, that can be required by a build and if required must match.
+
 
 
 ## 构建设备配置
 
-基础环境安装
-```
-sudo apt update
-sudo apt install sbuild ubuntu-dev-tools debootstrap
-```
 
-创建 sbuild 环境
-```
-sudo mk-sbuild --arch=riscv64 focal
-```
+**根据相关文档 riscv的构建机器为22.04 非20.04**
 
-配置 sbuild 环境
+获取程序buildd
+```
+$ sudo apt install git
+$ git clone https://git.launchpad.net/launchpad-buildd
+```
+安装依赖项
+```
+$ cd launchpad-buildd
+$ sudo apt-add-repository ppa:launchpad/ubuntu/buildd-staging
+$ sudo apt-add-repository ppa:launchpad/ubuntu/ppa
+$ vi /etc/apt/sources.list.d/launchpad-ubuntu-ppa-bionic.list <uncomment deb-src line>
+$ sudo apt update
+$ sudo apt build-dep launchpad-buildd fakeroot
+$ sudo apt install -f
+```
+注意：如果fakeroot找不到请尝试：
+```
+$ sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+$ sudo apt-get update
+$ sudo apt build-dep launchpad-buildd fakeroot
+$ sudo apt install -f
+```
+制作软件包
+```
+$ cd launchpad-buildd
+$ make
+$ cd ..
+$ sudo dpkg -i ./python3-lpbuildd_<version>_all.deb ./launchpad-buildd_<version>_all.deb
+```
+```
+$ git clone https://git.launchpad.net/ubuntu-archive-tools
+$ sudo apt install python3-launchpadlib python3-ubuntutools
+```
+下载 chroot 镜像：
+```
+./manage-chroot -s jammy -a riscv64 get
+sha1sum livecd.ubuntu-base.rootfs.tar.gz
+mv livecd.ubuntu-base.rootfs.tar.gz <sha1sum from previous line>
+sudo cp <sha1sum named file> /home/buildd/filecache-default
+sudo chown buildd: /home/buildd/filecache-default/<sha1sum named file>
+```
+如果需要修改git相关位置可在launchpad/launchpad/configs/development/launchpad-lazr.conf 和 launchpad/launchpad/lib/lp/services/config/schema-lazr.conf
 
-编辑 /etc/schroot/chroot.d/ 下的配置文件
+修改git_browse_root、git_ssh_root等项目
 
-```
-[focal-riscv64-sbuild]
-description=Ubuntu 20.04 riscv64 sbuild
-directory=/srv/chroot/focal-riscv64-sbuild
-root-users=root
-type=directory
-profile=sbuild
-users=YOUR_USERNAME
-```
 
-配置 buildd
+在 https://launchpad.test/builders 上注册构建机器
 
-编辑 /etc/buildd/buildd.conf
-```
-BUILD_ARCH=riscv64
-BUILD_CHROOT=riscv64-unstable
-```
+机器地址类似于 http://<buildd ip>:8221
 
-启动服务
-```
-sudo systemctl start buildd
-```
-
-在Launchpad的管理页面中进行连接
-
-配置访问密钥，然后在构建机上导入
-```
-export LAUNCHPAD_BUILDER_API="http://your-launchpad-instance/api/devel/"
-export LAUNCHPAD_BUILDER_KEY="/path/to/your/private/key"
-```
+提交完毕后 大约30秒会在网页中显示为空闲状态，即连接成功
